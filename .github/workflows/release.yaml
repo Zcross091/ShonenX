@@ -205,7 +205,11 @@ jobs:
           EOF
 
       - name: Get Dependencies
-        run: flutter pub get
+        run: |
+          for i in 1 2 3 4 5; do
+            echo "Running flutter pub get (attempt $i/5)..."
+            flutter pub get && break || (echo "pub get failed, retrying in 10s..." && sleep 10)
+          done
 
       - name: Build Split-per-ABI APKs (Mobile & TV)
         run: flutter build apk --release --split-per-abi --dart-define-from-file=keys.json
@@ -309,7 +313,11 @@ jobs:
         run: rm -rf build
 
       - name: Get Dependencies
-        run: flutter pub get
+        run: |
+          for i in 1 2 3 4 5; do
+            echo "Running flutter pub get (attempt $i/5)..."
+            flutter pub get && break || (echo "pub get failed, retrying in 10s..." && sleep 10)
+          done
 
       - name: Build Linux app
         run: flutter build linux --release -v --dart-define-from-file=keys.json
@@ -388,7 +396,11 @@ jobs:
 
       - name: Get Dependencies
         shell: bash
-        run: flutter pub get
+        run: |
+          for i in 1 2 3 4 5; do
+            echo "Running flutter pub get (attempt $i/5)..."
+            flutter pub get && break || (echo "pub get failed, retrying in 10s..." && sleep 10)
+          done
 
       - name: Build Windows app
         shell: bash
